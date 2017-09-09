@@ -1,5 +1,6 @@
 package com.yuandu.yuandu_mybatis.configs;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -7,35 +8,36 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:/mybatis.properties")
 public class MasterDataSourceConfig {
 
+    @Value("${mybatis.typeAliasesPackage}")
     private String typeAliasesPackage;
-
+    @Value("${mybatis.mapperLocations}")
     private String mapperLocations;
 
+    @Value("${master.db.url}")
     private String url;
-
+    @Value("${master.db.username}")
     private String user;
-
+    @Value("${master.db.password}")
     private String password;
 
+    @Value("${db.driverClass}")
     private String driverClass;
-
+    @Value("${db.initialSize}")
     private Integer initialSize = 10;
-
+    @Value("${db.minIdle}")
     private Integer minIdle = 2;
-
+    @Value("${db.maxActive}")
     private Integer maxActive = 500;
-
+    @Value("${db.maxWait}")
     private Integer maxWait = 14400;
-
+    @Value("${db.timeBetweenEvictionRunsMillis}")
     private Integer timeBetweenEvictionRunsMillis = 60000;
-
+    @Value("${db.minEvictableIdleTimeMillis}")
     private Integer minEvictableIdleTimeMillis = 300000;
-
+    @Value("${db.testOnBorrow}")
     private Boolean testOnBorrow = false;
-
+    @Value("${db.testOnReturn")
     private Boolean testOnReturn = false;
-
-
 
     public String getUrl() {
         return url;
