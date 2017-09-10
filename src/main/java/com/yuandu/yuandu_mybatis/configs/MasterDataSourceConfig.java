@@ -1,11 +1,13 @@
 package com.yuandu.yuandu_mybatis.configs;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource(value = "classpath:/mybatis.properties")
+@AutoConfigureOrder(0)
 public class MasterDataSourceConfig {
 
     @Value("${mybatis.typeAliasesPackage}")
@@ -34,9 +36,9 @@ public class MasterDataSourceConfig {
     private Integer timeBetweenEvictionRunsMillis = 60000;
     @Value("${db.minEvictableIdleTimeMillis}")
     private Integer minEvictableIdleTimeMillis = 300000;
-    @Value("${db.testOnBorrow}")
+//    @Value("${db.testOnBorrow}")
     private Boolean testOnBorrow = false;
-    @Value("${db.testOnReturn")
+//    @Value("${db.testOnReturn")
     private Boolean testOnReturn = false;
 
     public String getUrl() {

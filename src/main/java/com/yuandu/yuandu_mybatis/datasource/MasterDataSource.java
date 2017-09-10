@@ -2,29 +2,43 @@ package com.yuandu.yuandu_mybatis.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.yuandu.yuandu_mybatis.configs.MasterDataSourceConfig;
+import com.yuandu.yuandu_mybatis.mapper.BaseMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @AutoConfigureAfter({MasterDataSourceConfig.class})
+@AutoConfigureOrder(2)
 public class MasterDataSource {
+
+    public Logger logger = LoggerFactory.getLogger(MasterDataSource.class);
 
     @Autowired
     private MasterDataSourceConfig masterDataSourceConfig;
 
-    @Bean(name = "masterDataSource")
+    @Bean(name = "dataSource")
     @Primary
-    public DataSource masterDataSource() {
+    @ConditionalOnMissingBean
+    public DataSource dataSource() {
+        logger.info("===============masterDataSource=========================");
+        logger.info("masterDataSourceConfig.getTestOnBorrow()="+masterDataSourceConfig.getTestOnBorrow());
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(masterDataSourceConfig.getDriverClass());
         dataSource.setUrl(masterDataSourceConfig.getUrl());
@@ -41,22 +55,28 @@ public class MasterDataSource {
         return dataSource;
     }
 
-    @Bean(name = "masterTransactionManager")
+    @Bean(name = "transactionManager")
     @Primary
     public DataSourceTransactionManager masterTransactionManager() {
-        return new DataSourceTransactionManager(masterDataSource());
+        logger.info("===========masterTransactionManager=============");
+        return new DataSourceTransactionManager(dataSource());
     }
 
-    @Bean(name = "masterSqlSessionFactory")
+    @Bean(name = "sqlSessionFactory")
     @Primary
-    public SqlSessionFactory masterSqlSessionFactory(
-            @Qualifier("masterDataSource") DataSource masterDataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(
+            @Qualifier("dataSource") DataSource dataSource) throws Exception {
+        logger.info("===========sqlSessionFactory=============");
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(masterDataSource);
+        sessionFactory.setDataSource(dataSource);
+        logger.info("===========sqlSessionFactory1=============");
         sessionFactory.setTypeAliasesPackage(masterDataSourceConfig.getTypeAliasesPackage());//指定基包
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(masterDataSourceConfig.getMapperLocations()));//
+        logger.info("===========sqlSessionFactory2============="+masterDataSourceConfig.getTypeAliasesPackage());
+//        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+//                .getResources(masterDataSourceConfig.getMapperLocations()));//
+        logger.info("===========sqlSessionFactory3============="+masterDataSourceConfig.getMapperLocations());
         return sessionFactory.getObject();
     }
+
 
 }
