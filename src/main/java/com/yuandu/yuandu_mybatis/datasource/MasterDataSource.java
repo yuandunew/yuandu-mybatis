@@ -37,8 +37,7 @@ public class MasterDataSource {
     @Primary
     @ConditionalOnMissingBean
     public DataSource dataSource() {
-        logger.info("===============masterDataSource=========================");
-        logger.info("masterDataSourceConfig.getTestOnBorrow()="+masterDataSourceConfig.getTestOnBorrow());
+        logger.info("===============masterDataSource init start=========================");
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(masterDataSourceConfig.getDriverClass());
         dataSource.setUrl(masterDataSourceConfig.getUrl());
@@ -58,7 +57,7 @@ public class MasterDataSource {
     @Bean(name = "transactionManager")
     @Primary
     public DataSourceTransactionManager masterTransactionManager() {
-        logger.info("===========masterTransactionManager=============");
+        logger.info("===========masterTransactionManager init start=============");
         return new DataSourceTransactionManager(dataSource());
     }
 
@@ -66,15 +65,12 @@ public class MasterDataSource {
     @Primary
     public SqlSessionFactory sqlSessionFactory(
             @Qualifier("dataSource") DataSource dataSource) throws Exception {
-        logger.info("===========sqlSessionFactory=============");
+        logger.info("===========sqlSessionFactory init start=============");
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        logger.info("===========sqlSessionFactory1=============");
         sessionFactory.setTypeAliasesPackage(masterDataSourceConfig.getTypeAliasesPackage());//指定基包
-        logger.info("===========sqlSessionFactory2============="+masterDataSourceConfig.getTypeAliasesPackage());
 //        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
 //                .getResources(masterDataSourceConfig.getMapperLocations()));//
-        logger.info("===========sqlSessionFactory3============="+masterDataSourceConfig.getMapperLocations());
         return sessionFactory.getObject();
     }
 
