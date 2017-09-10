@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
@@ -26,6 +27,7 @@ import java.util.Properties;
 @Configuration
 @AutoConfigureAfter({MasterDataSourceConfig.class})
 @AutoConfigureOrder(2)
+@EnableTransactionManagement
 public class MasterDataSource {
 
     public Logger logger = LoggerFactory.getLogger(MasterDataSource.class);
