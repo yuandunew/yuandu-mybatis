@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource(value = "classpath:/mybatis.properties")
+//@PropertySource(value = "classpath:/mybatis.properties")
 @AutoConfigureOrder(0)
 public class MasterDataSourceConfig {
 
@@ -15,30 +15,30 @@ public class MasterDataSourceConfig {
     @Value("${mybatis.mapperLocations}")
     private String mapperLocations;
 
-    @Value("${master.db.url}")
+    @Value("${mybatis.master.db.url}")
     private String url;
-    @Value("${master.db.username}")
+    @Value("${mybatis.master.db.username}")
     private String user;
-    @Value("${master.db.password}")
+    @Value("${mybatis.master.db.password}")
     private String password;
 
-    @Value("${db.driverClass}")
+    @Value("${mybatis.db.driverClass}")
     private String driverClass;
-    @Value("${db.initialSize}")
+    @Value("${mybatis.db.initialSize}")
     private Integer initialSize = 10;
-    @Value("${db.minIdle}")
+    @Value("${mybatis.db.minIdle}")
     private Integer minIdle = 2;
-    @Value("${db.maxActive}")
+    @Value("${mybatis.db.maxActive}")
     private Integer maxActive = 500;
-    @Value("${db.maxWait}")
+    @Value("${mybatis.db.maxWait}")
     private Integer maxWait = 14400;
-    @Value("${db.timeBetweenEvictionRunsMillis}")
+    @Value("${mybatis.db.timeBetweenEvictionRunsMillis}")
     private Integer timeBetweenEvictionRunsMillis = 60000;
-    @Value("${db.minEvictableIdleTimeMillis}")
+    @Value("${mybatis.db.minEvictableIdleTimeMillis}")
     private Integer minEvictableIdleTimeMillis = 300000;
-//    @Value("${db.testOnBorrow}")
+//    @Value("${mybatis.db.testOnBorrow}")
     private Boolean testOnBorrow = false;
-//    @Value("${db.testOnReturn")
+//    @Value("${mybatis.db.testOnReturn")
     private Boolean testOnReturn = false;
 
     public String getUrl() {
