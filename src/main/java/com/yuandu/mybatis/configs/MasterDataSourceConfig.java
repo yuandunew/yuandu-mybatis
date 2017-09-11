@@ -15,11 +15,11 @@ public class MasterDataSourceConfig {
     @Value("${mybatis.mapperLocations}")
     private String mapperLocations;
 
-    @Value("${mybatis.master.db.url}")
+    @Value("${mybatis.db.master.url}")
     private String url;
-    @Value("${mybatis.master.db.username}")
+    @Value("${mybatis.db.master.username}")
     private String user;
-    @Value("${mybatis.master.db.password}")
+    @Value("${mybatis.db.master.password}")
     private String password;
 
     @Value("${mybatis.db.driverClass}")
