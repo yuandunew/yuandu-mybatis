@@ -1,4 +1,4 @@
-package com.yuandu.yuandu_mybatis.entity;
+package com.yuandu.mybatis.entity;
 
 import java.io.Serializable;
 

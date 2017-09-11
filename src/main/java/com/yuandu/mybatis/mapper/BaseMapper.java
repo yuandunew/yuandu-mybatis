@@ -1,4 +1,4 @@
-package com.yuandu.yuandu_mybatis.mapper;
+package com.yuandu.mybatis.mapper;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;

@@ -1,4 +1,4 @@
-package com.yuandu.yuandu_mybatis.configs;
+package com.yuandu.mybatis.configs;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;

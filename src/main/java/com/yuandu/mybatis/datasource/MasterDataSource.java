@@ -1,8 +1,7 @@
-package com.yuandu.yuandu_mybatis.datasource;
+package com.yuandu.mybatis.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.yuandu.yuandu_mybatis.configs.MasterDataSourceConfig;
-import com.yuandu.yuandu_mybatis.mapper.BaseMapper;
+import com.yuandu.mybatis.configs.MasterDataSourceConfig;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
@@ -15,14 +14,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.annotation.Order;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 @AutoConfigureAfter({MasterDataSourceConfig.class})
