@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -65,9 +66,9 @@ public class MasterDataSource {
         logger.info("===========sqlSessionFactory init start=============");
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
+        PathMatchingResourcePatternResolver mapper = new PathMatchingResourcePatternResolver();
         sessionFactory.setTypeAliasesPackage(masterDataSourceConfig.getTypeAliasesPackage());//指定基包
-//        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-//                .getResources(masterDataSourceConfig.getMapperLocations()));//
+        sessionFactory.setMapperLocations(mapper.getResources(masterDataSourceConfig.getMapperLocations()));
         return sessionFactory.getObject();
     }
 
