@@ -66,9 +66,10 @@ public class MasterDataSource {
         logger.info("===========sqlSessionFactory init start=============");
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        PathMatchingResourcePatternResolver mapper = new PathMatchingResourcePatternResolver();
+
         sessionFactory.setTypeAliasesPackage(masterDataSourceConfig.getTypeAliasesPackage());//指定基包
-        sessionFactory.setMapperLocations(mapper.getResources(masterDataSourceConfig.getMapperLocations()));
+//        PathMatchingResourcePatternResolver mapper = new PathMatchingResourcePatternResolver();
+//        sessionFactory.setMapperLocations(mapper.getResources(masterDataSourceConfig.getMapperLocations()));
         return sessionFactory.getObject();
     }
 
