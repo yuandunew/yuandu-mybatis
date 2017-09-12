@@ -18,7 +18,7 @@ public class MasterDataSourceConfig {
     @Value("${mybatis.db.master.url}")
     private String url;
     @Value("${mybatis.db.master.username}")
-    private String user;
+    private String username;
     @Value("${mybatis.db.master.password}")
     private String password;
 
@@ -49,12 +49,12 @@ public class MasterDataSourceConfig {
         this.url = url;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

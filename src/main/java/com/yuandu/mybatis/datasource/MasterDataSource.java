@@ -38,7 +38,7 @@ public class MasterDataSource {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(masterDataSourceConfig.getDriverClass());
         dataSource.setUrl(masterDataSourceConfig.getUrl());
-        dataSource.setUsername(masterDataSourceConfig.getUser());
+        dataSource.setUsername(masterDataSourceConfig.getUsername());
         dataSource.setPassword(masterDataSourceConfig.getPassword());
         dataSource.setInitialSize(masterDataSourceConfig.getInitialSize());
         dataSource.setMinIdle(masterDataSourceConfig.getMinIdle());
