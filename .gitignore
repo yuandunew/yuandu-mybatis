@@ -1,3 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-/yuandu-mybatis.iml
+yuandu-mybatis.iml
 /.idea/
+/target/
